@@ -1,0 +1,422 @@
+/* General Styles */
+:root {
+    --text-color-light: #000000; /* Dark text for light mode */
+    --text-color-dark: #ffffff; /* Light text for dark mode */
+    --bg-light: #ffffff; /* Light background */
+    --bg-dark: #000000; /* Black background */
+    --toggle-light: #ffdb4d; /* Sun-like toggle color */
+    --toggle-dark: #4a4a4a; /* Moon-like toggle color */
+    --transition-speed: 0.3s;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-color-light);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+body[data-theme="dark"] {
+    background-color: var(--bg-dark);
+    color: var(--text-color-dark);
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+
+
+
+main {
+    padding: 2rem;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    border-top: 1px solid var(--text-color-light);
+}
+
+.intro-container {
+    text-align: center;
+    padding: 0;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(120deg, #f3e5f5, #e3f2fd);
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    font-weight: 600;
+    color: #4a148c;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin: 10px 0 20px;
+    color: #6a1b9a;
+}
+
+.hero img {
+    width: 300px;
+    margin: 20px 0;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.cta-btn {
+    padding: 15px 30px;
+    background-color: #4a148c;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.cta-btn:hover {
+    background-color: #6a1b9a;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Features Section */
+.features {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    color: #4a148c;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #4a148c;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.feature-card {
+    background: #f3e5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: left;
+}
+
+.feature-card:hover {
+    transform: scale(1.05);
+}
+
+.feature-card img {
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+.feature-card h3 {
+    font-size: 1.5em;
+    color: #6a1b9a;
+}
+
+.feature-card p {
+    font-size: 1em;
+    color: #333;
+}
+
+/* Finance Tracker Section */
+.finance-tracker {
+    padding: 40px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.finance-tracker h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #4a148c;
+}
+
+.finance-tracker h2 {
+    font-size: 1.8em;
+    color: #4a148c;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Add some space between input items */
+    flex-wrap: wrap; /* Allow wrapping to support smaller screens */
+    margin-bottom: 15px; /* Add some margin at the bottom */
+}
+
+.input-item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+}
+
+.finance-tracker input[type="text"],
+.finance-tracker input[type="number"],
+.finance-tracker input[type="date"],
+.finance-tracker select {
+    padding: 10px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background-color: #f3e5f5;
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+}
+
+.finance-tracker input[type="text"]:focus,
+.finance-tracker input[type="number"]:focus {
+    background-color: #fff;
+    border: 2px solid #4a148c;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: #4a148c;
+}
+
+.finance-tracker input[type="date"] {
+    border: 1px solid #4a148c;
+    border-radius: 10px;
+    background-color: #f3e5f5;
+    color: #4a148c;
+    padding: 10px;
+    font-size: 1em;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.finance-tracker input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.finance-tracker input[type="date"]:hover {
+    border-color: #6a1b9a;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.finance-tracker button {
+    padding: 10px 20px;
+    background-color: #4a148c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.finance-tracker button:hover {
+    background-color: #6a1b9a;
+}
+
+/* Interactive Table Design */
+.finance-tracker table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.finance-tracker th, .finance-tracker td {
+    padding: 10px;
+    text-align: left;
+}
+
+.finance-tracker th {
+    background-color: #f3e5f5;
+    color: #4a148c;
+    border-bottom: 2px solid #ddd;
+}
+
+.finance-tracker td {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+.finance-tracker tr:hover td {
+    background-color: #f3e5f5;
+}
+
+/* Footer */
+footer {
+    padding: 20px;
+    background-color: #4a148c;
+    color: #fff;
+    text-align: center;
+}
+
+/* Keyframes for Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5em;
+    }
+    .hero p {
+        font-size: 1em;
+    }
+}
+
+.budget-section, .budget-display-section, .spending-section {
+    padding: 40px;
+    background-color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .budget-section h2, .budget-display-section h2, .spending-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+  .budget-section h1{
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #4a148c;
+  }
+  
+  #budget-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #budget-list li {
+    font-size: 1.2em;
+    color: var(--text-color);
+    margin: 5px 0;
+  }
+
+  .input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .input-item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    color: var(--text-color);
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    padding: 10px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background-color:#f3e5f5;
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+    color: var(--text-color);
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus {
+    background-color: #ffffff;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+    transform: scale(1.05);
+    animation: inputFocus 0.5s ease-in-out;
+    border:2px #6a1b9a solid;
+  }
+
+  input[type="submit"], input[type="button"] {
+    padding: 15px 30px;
+    margin-top: 10px;
+    background-color:#6a1b9a ;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: #6a1b9a;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  @keyframes inputFocus {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1.05); }
+  }
+  #budget-table {
+     width: 80%; 
+     margin: 0 auto; 
+     border-collapse: collapse;
+     }
+     #budget-table th, #budget-table td {
+        border: 1px solid var(--text-color); 
+        padding: 10px; text-align: center; 
+        color: var(--text-color); 
+    } 
+    #budget-table th { 
+        background-color: var(--primary-color); 
+        color: #6a1b9a; 
+    } 
+    #budget-table td 
+    { 
+        background-color: var(--secondary-color); 
+    } 
+    
+
+.error-container {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.error-message {
+    color: #d32f2f;
+    font-size: 1em;
+    margin: 5px 0;
+}
