@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Finance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body data-theme="light">
+<div class="intro-container">
+    <div class="hero fade-scroll">
+        <h1>Welcome to Finance Tracker</h1>
+        <p>Your journey to stress-free savings starts here.</p>
+        <img src="https://via.placeholder.com/300x200?text=Friendly+Illustration" alt="Illustration">
+        <button class="cta-btn" onclick="scrollToFeatures()">Explore Features</button>
+    </div>
+    <section class="features fade-scroll" id="features">
+        <h2>What Makes Us Unique?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="https://via.placeholder.com/40x40?text=" alt="Icon">
+                <h3>Calendar Sync</h3>
+                <p>Plan ahead by connecting with Google Calendar for future savings goals.</p>
+            </div>
+            <div class="feature-card">
+                <img src="https://via.placeholder.com/40x40?text=" alt="Icon">
+                <h3>Visual Insights</h3>
+                <p>Understand spending with clean, pastel-themed charts and graphs.</p>
+            </div>
+            <div class="feature-card">
+                <img src="https://via.placeholder.com/40x40?text=" alt="Icon">
+                <h3>Secure Tracking</h3>
+                <p>Feel safe knowing your data is private and stored securely.</p>
+            </div>
+            <div class="feature-card">
+                <img src="https://via.placeholder.com/40x40?text=" alt="Icon">
+                <h3>Real-Time Updates</h3>
+                <p>Track expenses and savings instantly, anytime and anywhere.</p>
+            </div>
+        </div>
+    </section>
+</div>
+ <!-- budget section anta ra-->
+ <div class="budget-section"> 
+    <h1>Finance Tracker</h1>
+<h2 id="balance">Current Balance: ₹0.00</h2>
+    <h2>Set Your Budget</h2> 
+    <form id="budget-form"> 
+        <div class="input-group"> 
+            <div class="input-item"> 
+                <label for="budget-category">Category:</label> <input type="text" id="budget-category" name="budget-category" placeholder="e.g., Groceries"> 
+            </div> 
+            <div class="input-item"> 
+                <label for="budget-amount">Amount:</label> 
+                <input type="number" id="budget-amount" name="budget-amount" placeholder="e.g., 5000"> 
+            </div> 
+        </div> 
+        <input type="button" id="add-budget-btn" value="Add Budget"> 
+    </form> 
+</div> 
+<div class="budget-display-section"> 
+    <h2>Current Budgets</h2> 
+    <table id="budget-table"> 
+        <thead> 
+            <tr> 
+                <th>Category</th> 
+                <th>Budget (₹)</th>
+                <th>Spent (₹)</th> 
+                <th>Balance (₹)</th> 
+            </tr> 
+        </thead> 
+        <tbody> <!-- Budget rows will be added here dynamically --> </tbody> 
+    </table> 
+</div> 
+<div class="spending-section"> 
+    <h2>Track Spending</h2> 
+    <form id="spending-form"> 
+        <div class="input-group"> 
+            <div class="input-item"> 
+                <label for="spending-category">Category:</label> 
+                <input type="text" id="spending-category" name="spending-category" placeholder="e.g., Groceries"> 
+            </div> 
+            <div class="input-item"> 
+                <label for="spending-amount">Amount:</label> 
+                <input type="number" id="spending-amount" name="spending-amount" placeholder="e.g., 500"> 
+            </div> 
+        </div> 
+    <input type="submit" value="Track Spending"> 
+</form>
+
+  <!-- budget section aipoi-->
+
+<!-- Finance Tracker Section -->
+<section class="finance-tracker fade-scroll">
+    <!--<h1>Finance Tracker</h1>-->
+    <!--<h2 id="balance">Current Balance: ₹0.00</h2>-->
+    <div id="error-container" class="error-container"></div>
+    <div class="input-group">
+        <div class="input-item">
+            <label for="currency">Select Currency: </label>
+            <select id="currency">
+                <option value="INR">INR</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+            </select>
+        </div>
+        <div class="input-item">
+            <label for="date">Choose Date: </label>
+            <input type="date" id="date">
+        </div>
+    </div>
+    <div class="input-group">
+        <div class="input-item">
+            <label for="description">Description: </label>
+            <input type="text" id="description">
+        </div>
+        <div class="input-item">
+            <label for="amount">Amount: </label>
+            <input type="number" id="amount">
+        </div>
+        <div class="input-item">
+            <label for="type">Type: </label>
+            <select id="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+        </div>
+    </div>
+    <button onclick="addTransaction()">Add Transaction</button>
+    <button onclick="exportToPDF()">Export to PDF</button>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="transaction-table">
+        <!-- Transactions will be inserted here -->
+        </tbody>
+    </table>
+
+   
+   
+</section>
+
+<footer>
+    &copy; 2024 Finance Tracker. All rights reserved.
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
