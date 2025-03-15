@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+        }
+        button {
+            background-color: #4a148c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #6a1b9a;
+        }
+    </style>
+</head>
+<body>
+    <h1>EMI Tracker</h1>
+    <div>
+        <p><strong>Current Balance:</strong> <span id="currentBalance">100000</span></p>
+        <p><strong>Total EMI Amount:</strong> <span id="totalEmiAmount">0</span></p>
+    </div>
+    <div>
+        <form id="emiForm">
+            <div class="form-group">
+                <label for="totalAmount">Total Amount: </label>
+                <input type="number" id="totalAmount" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration (months): </label>
+                <input type="number" id="duration" required>
+            </div>
+            <div class="form-group">
+                <label for="emiAmount">EMI Amount: </label>
+                <input type="number" id="emiAmount" required>
+            </div>
+            <button type="submit">Add EMI</button>
+        </form>
+        <p id="error" class="error"></p>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Total Amount</th>
+                <th>EMI Amount</th>
+                <th>Duration (months)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="emiTableBody">
+        </tbody>
+    </table>
+
+    <script>
+        let currentBalance = 100000;
+        let totalEmiAmount = 0;
+
+        const emiForm = document.getElementById('emiForm');
+        const totalAmountInput = document.getElementById('totalAmount');
+        const durationInput = document.getElementById('duration');
+        const emiAmountInput = document.getElementById('emiAmount');
+        const currentBalanceDisplay = document.getElementById('currentBalance');
+        const totalEmiAmountDisplay = document.getElementById('totalEmiAmount');
+        const emiTableBody = document.getElementById('emiTableBody');
+        const errorDisplay = document.getElementById('error');
+
+        emiForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const totalAmount = parseFloat(totalAmountInput.value);
+            const duration = parseInt(durationInput.value);
+            const emiAmount = parseFloat(emiAmountInput.value);
+
+            if (
+                isNaN(totalAmount) ||
+                isNaN(duration) ||
+                isNaN(emiAmount) ||
+                totalAmount <= 0 ||
+                duration <= 0 ||
+                emiAmount <= 0
+            ) {
+                errorDisplay.textContent = "Please enter valid numbers for Total Amount, Duration, and EMI Amount.";
+                return;
+            }
+
+            if (emiAmount > currentBalance) {
+                errorDisplay.textContent = "Insufficient balance to add this EMI.";
+                return;
+            }
+
+            errorDisplay.textContent = ""; // Clear any previous errors
+
+            // Update total EMI amount and current balance
+            totalEmiAmount += emiAmount;
+            currentBalance -= emiAmount;
+
+            // Update UI
+            totalEmiAmountDisplay.textContent = totalEmiAmount.toFixed(2);
+            currentBalanceDisplay.textContent = currentBalance.toFixed(2);
+
+            // Add row to the table
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${totalAmount.toFixed(2)}</td>
+                <td>${emiAmount.toFixed(2)}</td>
+                <td>${duration}</td>
+                <td><button class="remove-btn">Remove</button></td>
+            `;
+            emiTableBody.appendChild(row);
+
+            // Add remove functionality
+            row.querySelector('.remove-btn').addEventListener('click', () => {
+                totalEmiAmount -= emiAmount;
+                currentBalance += emiAmount;
+
+                totalEmiAmountDisplay.textContent = totalEmiAmount.toFixed(2);
+                currentBalanceDisplay.textContent = currentBalance.toFixed(2);
+
+                row.remove();
+            });
+
+            // Clear form inputs
+            totalAmountInput.value = '';
+            durationInput.value = '';
+            emiAmountInput.value = '';
+        });
+    </script>
+</body>
+</html>

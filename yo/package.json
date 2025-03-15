@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "web-vitals": "^4.2.4"
+  },
+  "homepage": "http://localhost:3000/"
+}

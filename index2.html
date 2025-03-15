@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink Budgeter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="logo.jpg" style="border-radius: 50%;" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div id="mySidebar" class="sidebar color2_bg">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#set-budget" class="color1" onclick="closeNavAfterClick()"><i class="fas fa-wallet color1"></i > Set Your Budget</a>
+    <a href="#current-budget" class="color1" onclick="closeNavAfterClick()"><i class="fas fa-chart-line color1"></i> Current Budget</a>
+    <a href="#track-spending" class="color1" onclick="closeNavAfterClick()"><i class="fas fa-dollar-sign color1"></i> Track Spending</a>
+    <a href="http://localhost:3000/" class="color1" id="calen" target="_blank"><i class="fas fa-calendar-alt color1"></i> Calendar</a>
+    <a href="#theme" class="color1" id="showdiv" ><i class="fas fa-palette color1"></i> Theme</a>
+    <div id="circle_container" >
+        <div id="circle1" onclick="closeNavAfterClick()" class="circle" style="background-color: #6a1b9a;"></div>
+        <div id="circle2" onclick="closeNavAfterClick()" class="circle" style="background-color: #e91e63"></div>
+        <div id="circle3" onclick="closeNavAfterClick()" class="circle" style="background-color: #000000;"></div>
+        <div id="circle4" onclick="closeNavAfterClick()" class="circle" style="background-color: #388e3c"></div>
+        <div id="circle5" onclick="closeNavAfterClick()" class="circle" style="background-color: #fbc02d"></div>
+        <div id="circle6" onclick="closeNavAfterClick()" class="circle" style="background-color: #1e88e5"></div>
+      </div>
+    <li  style="list-style: none;"><a href="#" id="notesLink" class="color1 color2_bg"><i class="fas fa-sticky-note color1 "></i> Notes</a></li>
+    <div class="note-tools" id="noteTools" style="display: none; " >
+        <button id="addNoteButton" class="color2_bg color1" onclick="closeNavAfterClick()">Add Note</button>
+        <div class="color-picker">
+          <label for="colorPicker">Select Color:</label>
+          <input type="color" id="colorPicker" value="#f3e5f5">
+        </div>
+      </div>
+    <a href="index2.html" class="color1" onclick="closeNavAfterClick()"><i class="fas fa-chart-pie color1"></i> Pie Chart</a>
+    <a href="#emiForm" class="color1" onclick="closeNavAfterClick()"><i class="fas fa-money-bill-wave color1"></i> EMI Tracker</a>
+    </div>
+    <div class="note-container" id="noteContainer"></div>
+</div>
+
+<div id="main">
+    <button class="openbtn color2_bg color1" id="theme-box" onclick="openNav()">☰</button>
+   
+</div>
+<!-- Header -->
+<header>
+    <div class="header-content">
+        <h1>My Personal Dashboard</h1>
+        <div class="sign-in-container">
+            <span id="sign-in-icon" onclick="toggleSignInModal()">🔒 Sign In</span>
+            <button id="sign-out-btn" style="display: none;" onclick="signOut()">Sign Out</button>
+        </div>
+    </div>
+</header>
+<!-- Main Content -->
+<main id="main-content">
+    <div id="dashboard" style="display: none;">
+        <h2>Welcome, <span id="user-name"></span>!</h2>
+    </div>
+</main>
+    <div class="intro-container"> 
+        <section class="features fade-scroll" id="features">
+            <h2 class="color1">What Makes Us Unique?</h2>
+            <div class="features-grid">
+                <div class="feature-card color2_bg">
+                    <img src="cal.png" alt="Icon">
+                    <h3 class="bla color1">Calendar Sync</h3>
+                    <p>Plan ahead by connecting with Google Calendar for future savings goals.</p>
+                </div>
+                <div class="feature-card color2_bg">
+                    <img src="chart.png" alt="Icon">
+                    <h3 class="bla color1">Visual Insights</h3>
+                    <p>Understand spending with clean, pastel-themed charts and graphs.</p>
+                </div>
+                <div class="feature-card color2_bg">
+                    <img src="lock.png" alt="Icon">
+                    <h3 class="bla color1">Secure Tracking</h3>
+                    <p>Feel safe knowing your data is private and stored securely.</p>
+                </div>
+                <div class="feature-card color2_bg">
+                    <img src="ok.png" alt="Icon">
+                    <h3 class="bla color1" >Real-Time Updates</h3>
+                    <p>Track expenses and savings instantly, anytime and anywhere.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+ <!-- budget section anta ra-->
+ <div class="budget-section"  id="set-budget" class="content-section"> 
+    <h1 class="color1" >Finance Tracker</h1>
+<h2 id="balance">Current Balance: ₹0.00</h2>
+    <h2>Set Your Budget</h2> 
+    <form id="budget-form"> 
+        <div class="input-group"> 
+            <div class="input-item"> 
+                <label for="budget-category">Category:</label> 
+                <input type="text" id="budget-category" class="color2_bg" name="budget-category" placeholder="e.g., Groceries"> 
+            </div> 
+            <div class="input-item"> 
+                <label for="budget-amount">Amount:</label> 
+                <input type="number" id="budget-amount" class="color2_bg" name="budget-amount" placeholder="e.g., 5000"> 
+            </div> 
+        </div> 
+        <input type="button" id="add-budget-btn" value="Add Budget" class="color1_bg color2"> 
+    </form> 
+</div> 
+<div class="budget-display-section" id="current-budget" class="content-section"> 
+    <h2>Current Budget</h2> 
+    <table id="budget-table"> 
+        <thead> 
+            <tr> 
+                <th class="color1">Category</th> 
+                <th class="color1" >Budget (₹)</th>
+                <th class="color1">Spent (₹)</th> 
+                <th class="color1">Balance (₹)</th> 
+            </tr> 
+        </thead> 
+        <tbody> <!-- Budget rows will be added here dynamically --> </tbody> 
+    </table> 
+</div> 
+<div class="spending-section" id="track-spending" class="content-section"> 
+    <h2>Track Spending</h2> 
+    <form id="spending-form"> 
+        <div class="input-group"> 
+            <div class="input-item"> 
+                <label for="spending-category">Category:</label> 
+                <input type="text" id="spending-category" class="color2_bg" name="spending-category" placeholder="e.g., Groceries"> 
+            </div> 
+            <div class="input-item"> 
+                <label for="spending-amount">Amount:</label> 
+                <input type="number" id="spending-amount" class="color2_bg" name="spending-amount" placeholder="e.g., 500"> 
+            </div> 
+        </div> 
+    <input type="submit" value="Track Spending" class="color1_bg color2"> 
+</form>
+
+  <!-- budget section aipoi-->
+
+<!-- Finance Tracker Section -->
+<section class="finance-tracker fade-scroll">
+    <!--<h1>Finance Tracker</h1>-->
+    <!--<h2 id="balance">Current Balance: ₹0.00</h2>-->
+    <div id="error-container" class="error-container"></div>
+    <div class="input-group">
+        <div class="input-item">
+            <label for="currency">Select Currency: </label>
+            <select id="currency" class="color1 color2_bg">
+                <option value="INR" class="color1">INR</option>
+                <option value="USD" class="color1">USD</option>
+                <option value="EUR" class="color1">EUR</option>
+            </select>
+        </div>
+        <div class="input-item">
+            <label for="date" >Choose Date: </label>
+            <input type="date" id="date" class="color1 color2_bg">
+        </div>
+    </div>
+    <div class="input-group">
+        <div class="input-item">
+            <label for="description" >Description: </label>
+            <input type="text" id="description" class="color1 color2_bg" >
+        </div>
+        <div class="input-item">
+            <label for="category">Category: </label>
+            <select id="category" class="color1 color2_bg">
+                <option value="food"  >Food</option>
+                <option value="utility" >Utility</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="transportation">Transportation</option>
+                <option value="miscellaneous">Miscellaneous</option>
+                <option value="others">Others</option>
+            </select>
+        </div>
+        <div class="input-item" >
+            <label for="amount">Amount: </label>
+            <input type="number" id="amount" class="color1 color2_bg" >
+        </div>
+        <div class="input-item">
+            <label for="type">Type: </label>
+            <select id="type" class="color1 color2_bg">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            
+        </div>
+    </div>
+    <button onclick="addTransaction()" class="color1_bg color2 ">Add Transaction</button>
+    <button onclick="exportToPDF()" class="color1_bg color2" >Export to PDF</button>
+    <table>
+        <thead>
+        <tr class="color1 color2_bg">
+            <th class="color1 color2_bg">Date</th>
+            <th class="color1 color2_bg">Description</th>
+            <th class="color1 color2_bg">Amount</th>
+            <th class="color1 color2_bg">Type</th>
+            <th class="color1 color2_bg">Action</th>
+        </tr>
+        </thead>
+        <tbody id="transaction-table" class="color1 color2_bg color1_bg">
+        <!-- Transactions will be inserted here -->
+        </tbody>
+    </table>
+
+   
+   
+</section>
+<div class="chart-container" id="piechart" >
+    <canvas id="expenseChart" width="400" height="400"></canvas>
+</div>
+<div>
+    <h1 class="color2 ">EMI TRACKER</h1>
+    <p><strong>Current Balance:</strong> <span id="currentBalance">0</span></p>
+    <p><strong>Total EMI Amount:</strong> <span id="totalEmiAmount">0</span></p>
+</div>
+<div>
+    <form id="emiForm">
+        <div class="form-group">
+            <label for="totalAmount">Total Amount: </label>
+            <input type="number" id="totalAmount" class="color1_bg" required>
+        </div>
+        <div class="form-group">
+            <label for="duration">Duration (months): </label>
+            <input type="number" id="duration" class="color1_bg"  required>
+        </div>
+        <div class="form-group">
+            <label for="emiAmount">EMI Amount: </label>
+            <input type="number" id="emiAmount" class="color1_bg"  required>
+        </div>
+        <button type="submit" class="color2_bg color2">Add EMI</button>
+    </form>
+    <p id="error" class="error"></p>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th >Total Amount</th>
+            <th >EMI Amount</th>
+            <th >Duration (months)</th>
+            <th >Action</th>
+        </tr>
+    </thead>
+    <tbody id="emiTableBody">
+    </tbody>
+</table>
+
+
+<footer class="color1_bg color2">
+    &copy; 2024 Finance Tracker. All rights reserved.
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>
